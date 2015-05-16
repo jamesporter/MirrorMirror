@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  <title>tracking.js - face tracking fish tank</title>
+  <link rel="stylesheet" href="css/styles.css">
+
+  <style>
+  body {
+    overflow: hidden;
+  }
+  #video, #canvas {
+    position: absolute;
+    z-index: 100;
+    bottom: 0px;
+  }
+  #viewport {
+    padding-top: 40px;
+
+  }
+  </style>
+</head>
+
+<body>
+  <canvas id="mirror"></canvas>
+
+  <div id="viewport">
+    <video id="video" width="240" height="180" preload autoplay loop muted></video>
+    <canvas id="canvas" width="240" height="180"></canvas>
+  </div>
+
+  <script src="js/vendor/jquery-2.1.1.min.js"></script>
+
+  <script src="js/tracking-min.js"></script>
+  <script src="js/data/face-min.js"></script>
+
+  <script src="js/tracking.js"></script>
+</body>
+</html>
