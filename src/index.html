@@ -10,9 +10,11 @@
 </head>
 <body>
 
-  <h1 style="text-align: center; font-size: 8em; line-height: 4em;">MirrorMirror</h1>
+  <canvas id="mirrorCanvas" resize></canvas>
 
   <script src="js/vendor/jquery-2.1.1.min.js"></script>
+  <script src="js/vendor/paper-full.min.js"></script>
   <script src="js/main.js"></script>
+  <script type="text/paperscript" canvas="mirrorCanvas" src="js/mirror.js"></script>
 </body>
 </html>
