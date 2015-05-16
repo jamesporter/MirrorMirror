@@ -31,11 +31,24 @@
   <canvas id="mirror"></canvas>
 
   <div id="viewport">
-    <video id="video" width="320" height="240" preload autoplay loop muted></video>
-    <canvas id="canvas" width="320" height="240"></canvas>
+    <video id="video" width="240" height="180" preload autoplay loop muted></video>
+    <canvas id="canvas" width="240" height="180"></canvas>
   </div>
 
   <script>
+
+    var ellipse = function(context, cx, cy, rx, ry){
+      context.save();
+      context.beginPath();
+
+      context.translate(cx-rx, cy-ry);
+      context.scale(rx, ry);
+      context.arc(1, 1, 1, 0, 2 * Math.PI, false);
+
+      context.restore(); // restore to original state
+      context.fill();
+    };
+
     var canvas = document.getElementById('canvas');
     var context = canvas.getContext('2d');
 
@@ -48,7 +61,10 @@
     var faceY = 0;
     var tracker = new tracking.ObjectTracker('face');
 
-    tracker.setInitialScale(4);
+    var cx = mirrorCanvas.width/2, cy = mirrorCanvas.height/2;
+    var x = cx, y = cy;
+
+    tracker.setInitialScale(2);
     tracker.setStepSize(2);
 
     tracking.track('#video', tracker, { camera: true });
@@ -56,8 +72,7 @@
     tracker.on('track', function(event) {
       context.clearRect(0, 0, canvas.width, canvas.height);
 
-      mirrorCtx.fillStyle = "#000";
-      mirrorCtx.fillRect(0,0, mirrorCanvas.width, mirrorCanvas.height);
+
 
       event.data.forEach(function(rect) {
         context.strokeStyle = '#a64ceb';
@@ -74,12 +89,33 @@
 
             mx = mirrorCanvas.width - (mx + mw);
 
+            cx = mx + mw/2;
+            cy = my + mh/2;
 
-        mirrorCtx.fillStyle = "#fff";
-        mirrorCtx.fillRect(mx, my, mw, mh);
+            x += (cx - x)/10;
+            y += (cy - y)/10;
+
+        // mirrorCtx.fillStyle = "#fff";
+        // mirrorCtx.fillRect(mx, my, mw, mh);
+
+          console.log(x,y);
         });
 
     });
+
+
+    var redraw = function(){
+        mirrorCtx.fillStyle = "#000";
+        mirrorCtx.fillRect(0,0, mirrorCanvas.width, mirrorCanvas.height);
+
+        mirrorCtx.fillStyle = "#fff";
+        //mirrorCtx.fillRect(x-50,y-50,100,100);
+        ellipse(mirrorCtx, x, y, 65, 80);
+        setTimeout(redraw, 60);
+    };
+
+    setTimeout(redraw, 60);
+
   </script>
 
 </body>
