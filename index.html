@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  <title>tracking.js - face tracking fish tank</title>
+  <link rel="stylesheet" href="assets/demo.css">
+
+  <script src="lib/tracking-min.js"></script>
+  <script src="lib/data/face-min.js"></script>
+
+  <style>
+  body {
+    overflow: hidden;
+  }
+  #video, #canvas {
+    bottom: 0;
+    position: absolute;
+    z-index: 100;
+  }
+  #viewport {
+    padding-top: 40px;
+  }
+  </style>
+</head>
+
+<body>
+  <div id="viewport">
+    <video id="video" width="320" height="240" preload autoplay loop muted></video>
+    <canvas id="canvas" width="320" height="240"></canvas>
+  </div>
+
+  <script>
+    var canvas = document.getElementById('canvas');
+    var context = canvas.getContext('2d');
+
+    var faceX = 0;
+    var faceY = 0;
+    var tracker = new tracking.ObjectTracker('face');
+
+    tracker.setInitialScale(4);
+    tracker.setStepSize(2);
+
+    tracking.track('#video', tracker, { camera: true });
+
+    tracker.on('track', function(event) {
+
+
+      
+    });
+  </script>
+
+</body>
+</html>
