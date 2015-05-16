@@ -4,7 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
   <title>tracking.js - face tracking fish tank</title>
-  <link rel="stylesheet" href="assets/demo.css">
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 
   <script src="lib/tracking-min.js"></script>
   <script src="lib/data/face-min.js"></script>
@@ -14,17 +16,20 @@
     overflow: hidden;
   }
   #video, #canvas {
-    bottom: 0;
     position: absolute;
     z-index: 100;
+    bottom: 0px;
   }
   #viewport {
     padding-top: 40px;
+
   }
   </style>
 </head>
 
 <body>
+  <canvas id="mirror"></canvas>
+
   <div id="viewport">
     <video id="video" width="320" height="240" preload autoplay loop muted></video>
     <canvas id="canvas" width="320" height="240"></canvas>
@@ -33,6 +38,11 @@
   <script>
     var canvas = document.getElementById('canvas');
     var context = canvas.getContext('2d');
+
+    var mirrorCanvas = document.getElementById('mirror');
+    mirrorCanvas.width = window.innerWidth;
+    mirrorCanvas.height = window.innerHeight;
+    var mirrorCtx = mirrorCanvas.getContext('2d');
 
     var faceX = 0;
     var faceY = 0;
@@ -44,9 +54,31 @@
     tracking.track('#video', tracker, { camera: true });
 
     tracker.on('track', function(event) {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+
+      mirrorCtx.fillStyle = "#000";
+      mirrorCtx.fillRect(0,0, mirrorCanvas.width, mirrorCanvas.height);
+
+      event.data.forEach(function(rect) {
+        context.strokeStyle = '#a64ceb';
+        context.strokeRect(rect.x, rect.y, rect.width, rect.height);
+        context.font = '11px Helvetica';
+        context.fillStyle = "#fff";
+        context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
+        context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
+
+        var mx = mirrorCanvas.width * rect.x/canvas.width,
+            my = mirrorCanvas.height * rect.y/canvas.height,
+            mw = mirrorCanvas.width * rect.width/canvas.width,
+            mh = mirrorCanvas.height * rect.height/canvas.height;
+
+            mx = mirrorCanvas.width - (mx + mw);
 
 
-      
+        mirrorCtx.fillStyle = "#fff";
+        mirrorCtx.fillRect(mx, my, mw, mh);
+        });
+
     });
   </script>
 
