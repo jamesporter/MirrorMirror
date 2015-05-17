@@ -42,6 +42,8 @@ tracker.on('track', function(event) {
         x += (cx - x)/10;
         y += (cy - y)/10;
 
+        faceX = x;
+        faceY = y;
       // console.log(x,y);
     });
 });
