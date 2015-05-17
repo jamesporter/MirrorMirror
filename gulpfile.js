@@ -14,7 +14,7 @@ var            gulp = require( 'gulp' ),
 var path = {
         src: 'src/',
        html: 'src/**/*.html',
-         js: 'src/js/*.js',
+         js: 'src/js/**/*.js',
        sass: 'src/sass/**/*.scss',
         css: 'src/css/',
 };
@@ -36,7 +36,7 @@ gulp.task( 'server', function() {
 
 // jshint
 gulp.task( 'jshint', function() {
-  gulp.src( path.js )
+  gulp.src( [path.js, '!src/js/**/*.min.js', , '!src/js/**/*-min.js', '!src/js/data/**/*.js'] )
     .pipe( jshint() )
     .pipe( jshint.reporter( stylish ) );
 });

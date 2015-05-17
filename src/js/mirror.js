@@ -39,5 +39,5 @@ function onMouseMove(event) {
 
   for (var i = rectangles.length - 1; i >= 0; i--) {
     rectangles[i].position = canvasCenter - offset / (rectangles.length - i + 1);
-  };
+  }
 }
