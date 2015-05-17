@@ -20,7 +20,7 @@ for(var i=0; i<N; i++){
     if( i % 10 == 0){
 
         var leaf = new Raster({
-          source: "square0" + (i/10 + 1),
+          source: "leaf0" + (i/10 + 1),
           position: [view.size.width * Math.random(), view.size.width * Math.random()]
         }).scale((Math.floor(Math.random() * 3) + 2) / 10) ;
 
@@ -45,6 +45,12 @@ function onFrame(){
 
         for(var idx in rasters){
           var leaf = rasters[idx];
+          leaf.origPos.y += 1;
+
+          if(leaf.origPos.y > view.size.height + 200){
+            leaf.origPos.y = -200;
+          }
+
           leaf.position.x = leaf.origPos.x + 0.1 * (view.center.x - faceX);
         }
     }
