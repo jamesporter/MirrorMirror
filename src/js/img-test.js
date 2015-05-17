@@ -14,9 +14,18 @@ if (canvasWidth < canvasHeight){
 
 var squares = ['square01', 'square02', 'square03', 'square04', 'square05', 'square06'];
 
-for (var i = squares.length - 1; i >= 0; i--) {
+var triangles = ['triangle01', 'triangle02', 'triangle03', 'triangle04', 'triangle05', 'triangle06'];
+
+for (var s = squares.length - 1; s >= 0; s--) {
   new Raster({
-    source: squares[i],
+    source: squares[s],
+    position: [canvasWidth * Math.random(), canvasHeight * Math.random()]
+  }).scale((Math.floor(Math.random() * 3) + 2) / 10) ;
+}
+
+for (var t = triangles.length - 1; t >= 0; t--) {
+  new Raster({
+    source: triangles[t],
     position: [canvasWidth * Math.random(), canvasHeight * Math.random()]
   }).scale((Math.floor(Math.random() * 3) + 2) / 10) ;
 }
