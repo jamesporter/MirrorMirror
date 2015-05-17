@@ -1,10 +1,7 @@
 var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
 
-var mirrorCanvas = document.getElementById('mirror');
-mirrorCanvas.width = window.innerWidth;
-mirrorCanvas.height = window.innerHeight;
-var mirrorCtx = mirrorCanvas.getContext('2d');
+var minX = 0, maxX = 0, minY = 0, maxY = 0;
 
 var faceX = 0;
 var faceY = 0;
