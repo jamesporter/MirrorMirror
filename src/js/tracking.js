@@ -25,8 +25,8 @@ var tracker = new tracking.ObjectTracker('face');
 var cx = mirrorCanvas.width/2, cy = mirrorCanvas.height/2;
 var x = cx, y = cy;
 
-tracker.setInitialScale(2);
-tracker.setStepSize(2);
+tracker.setInitialScale(1);
+tracker.setStepSize(1.1);
 
 tracking.track('#video', tracker, { camera: true });
 

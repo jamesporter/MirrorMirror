@@ -44,17 +44,20 @@ body {
 // STYLES
 //===============================================================================
 body {
-  background-image: url("../img/thin-trees-50.png");
+  // background-image: url("../img/thin-trees-50.png");
   background-size: cover;
 }
 
 .overlay {
-  // background-image: url("../img/bw-pattern-inv.png");
+  background-image: url("../img/thin-trees-trans.png");
+  background-size: cover;
   width:100%;
   height:100%;
   position: absolute;
   top:0px;
   bottom:0px;
+  z-index: 999;
+  opacity: .5;
 }
 
 #mirror,
@@ -68,4 +71,12 @@ body {
 
 img {
   display: none;
+}
+
+#canvas {
+  // opacity: 0.5;
+}
+
+video {
+  opacity: .5;
 }

@@ -1,28 +1,35 @@
 var paths = [];
 var rasters = [];
 
-var N = 50;
+var N = 20;
 
 view.size
 console.log(view.size.width, view.size.height);
 
+var branches = ['branch01', 'branch02', 'branch03', 'branch04', 'branch05', 'branch06'];
+
+var leafIdx = 1;
+
 for(var i=0; i<N; i++){
-    var tree = new Path.Line(new Point(0, 10 * i),
-                             new Point(0, view.size.height - 10 * i));
-    tree.idNum = i;
+    var tree = new Raster({
+      source: branches[i%6],
+      possition: view.center
+    }).scale(i / 35, .75);
+    tree.position.y = 500;
     tree.position.x = (1.5 * Math.random() - 0.25) * view.size.width;
     tree.origPos = tree.position;
-    tree.strokeColor = 'white';
-    tree.strokeWidth = 20/ (i+1);
+    tree.idNum = i;
     paths.push(tree);
 
 
-    if( i % 10 == 0){
 
+
+    if( i % 3 == 0){
+        leafIdx++;
         var leaf = new Raster({
-          source: "square0" + (i/10 + 1),
+          source: "leaf0" + leafIdx,
           position: [view.size.width * Math.random(), view.size.width * Math.random()]
-        }).scale((Math.floor(Math.random() * 3) + 2) / 10) ;
+        }).scale((Math.floor(Math.random() * 3) + 2) / 10).rotate(- Math.random() * 45) ;
 
         leaf.origPos = leaf.position;
 
@@ -45,7 +52,13 @@ function onFrame(){
 
         for(var idx in rasters){
           var leaf = rasters[idx];
-          leaf.position.x = leaf.origPos.x + 0.1 * (view.center.x - faceX);
+          // leaf.position.x = leaf.origPos.x + 100 * (view.center.x - faceX);
+          leaf.position.x = Math.random() * view.size.width;
+          leaf.origPos.y += 1;
+          if (leaf.origPos.y >= view.size.height + 100) {
+            leaf.origPos.y = -100;
+            leaf.origPos.x = Math.random() * view.size.width;
+          }
         }
     }
 }
