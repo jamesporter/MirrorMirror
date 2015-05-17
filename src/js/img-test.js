@@ -41,5 +41,6 @@ function onFrame(event) {
     }
 
     children[c].rotate(angle);
+    children[c].position += 0.2;
   }
 }
