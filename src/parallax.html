@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  <title>tracking.js - face tracking fish tank</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <img id="square01" src="../img/square-01.png">
+  <img id="square02" src="../img/square-02.png">
+  <img id="square03" src="../img/square-03.png">
+  <img id="square04" src="../img/square-04.png">
+  <img id="square05" src="../img/square-05.png">
+  <img id="square06" src="../img/square-06.png">
+
+  <canvas id="mirror"></canvas>
+
+  <div id="viewport">
+    <video id="video" width="240" height="180" preload autoplay loop muted></video>
+    <canvas id="canvas" width="240" height="180"></canvas>
+  </div>
+
+  <script src="js/vendor/jquery-2.1.1.min.js"></script>
+  <script src="js/vendor/paper-full.min.js"></script>
+
+  <script src="js/tracking-min.js"></script>
+  <script src="js/data/face-min.js"></script>
+
+  <script src="js/parallax.js"></script>
+  <script type="text/paperscript" canvas="mirror" src="js/parallax-paper.js"></script>
+</body>
+</html>
