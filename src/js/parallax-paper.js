@@ -1,47 +1,30 @@
-var canvasElement = $('#mirror');
+var paths = [];
+var N = 50;
 
-var canvasWidth = canvasElement.width(),
-    canvasHeight = canvasElement.height(),
-    canvasCenter = new Point(canvasWidth / 2, canvasHeight / 2);
+view.size
+console.log(view.size.width, view.size.height);
 
-var minDimension;
-
-if (canvasWidth < canvasHeight){
-  minDimension = canvasWidth;
-} else {
-  minDimension = canvasHeight;
+for(var i=0; i<N; i++){
+    var tree = new Path.Line(new Point(0, 10 * i),
+                             new Point(0, view.size.height - 10 * i));
+    tree.idNum = i;
+    tree.position.x = (1.5 * Math.random() - 0.25) * view.size.width;
+    tree.origPos = tree.position;
+    tree.strokeColor = 'white';
+    tree.strokeWidth = 20/ (i+1);
+    paths.push(tree);
 }
 
-// var squares = ['square01', 'square02', 'square03', 'square04', 'square05', 'square06'];
+var pos;
 
-// for (var i = squares.length - 1; i >= 0; i--) {
-//   new Raster({
-//     source: squares[i],
-//     position: [canvasWidth * Math.random(), canvasHeight * Math.random()]
-//   }).scale((Math.floor(Math.random() * 3) + 2) / 10) ;
-// }
+function onFrame(){
+    if(!!faceX){
+        for(var idx in paths){
+            var tree = paths[idx];
+            tree.position.x = tree.origPos.x + 0.1 * (tree.idNum + 1) * (view.center.x - faceX);
 
-// var children = project.activeLayer.children;
-// function onFrame(event) {
-//   for (var c = children.length - 1; c >= 0; c--) {
-//     var angle;
-//     if (c % 2 === 0) {
-//       angle = 0.1;
-//     } else {
-//       angle = -0.1;
-//     }
+            //tree.position.y = tree.origPos.x + 0.001 * (tree.idNum + 1) * (view.center.y - faceY);
 
-//     children[c].rotate(angle);
-//   }
-// }
-
-new Raster({
-  source: 'square01',
-  position: view.center
-});
-
-
-var children = project.activeLayer.children;
-function onFrame(event) {
-  console.log('paper!!!', x,y);
+        }
+    }
 }

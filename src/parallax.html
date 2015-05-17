@@ -5,6 +5,26 @@
   <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
   <title>tracking.js - face tracking fish tank</title>
   <link rel="stylesheet" href="css/styles.css">
+
+  <style>
+  body {
+    overflow: hidden;
+  }
+  #video, #canvas {
+    position: absolute;
+    z-index: 100;
+    bottom: 0px;
+  }
+  #viewport {
+    padding-top: 40px;
+
+  }
+
+  img{
+    display: none;
+  }
+  </style>
+
 </head>
 
 <body>
@@ -27,6 +47,12 @@
 
   <script src="js/tracking-min.js"></script>
   <script src="js/data/face-min.js"></script>
+
+<script>
+var mirrorCanvas = document.getElementById('mirror');
+mirrorCanvas.width = window.innerWidth;
+mirrorCanvas.height = window.innerHeight;
+</script>
 
   <script src="js/parallax.js"></script>
   <script type="text/paperscript" canvas="mirror" src="js/parallax-paper.js"></script>
